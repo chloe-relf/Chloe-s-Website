@@ -1,0 +1,31 @@
+---
+about:
+  template: jolla
+  id: about-block
+  image: "img/IMG_3010 2.jpg"
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/chloerelf
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/chloe-relf/
+    - icon: envelope
+      text: Email
+      href: "mailto:mail.cer92@case.edu"  
+---
+
+::: {#about-block}
+:::
+
+# Welcome to my website!
+
+I am Chloe Relf, an MPH student at Case Western Reserve University, where I am studying population health research. I also received my bachelor's degree from Case, majoring in Economics and Psychology with additional coursework in biology and chemistry.
+
+I currently work in the Samuels Laboratory at the Louis Stokes Cleveland VA Medical Center, where I contribute to research on diabetic retinopathy using mouse models. My research experience has included laboratory techniques such as PCR, immunohistochemistry, and electroretinography, as well as work examining the biological mechanisms underlying retinal disease.
+
+My current interests involve expanding from laboratory-based health research toward population-level questions in epidemiology and health economics. I am particularly interested in zoonotic and vector-borne diseases, disease risk and prevention, and the ways economic and healthcare systems influence population health outcomes. Through my MPH training, I am developing quantitative and epidemiologic skills that I hope to apply to these areas in future research. 
+
+Please feel free to [contact me](mailto:mail.cer92@case.edu) if you have any questions or would like to discuss potential projects.
+
+
