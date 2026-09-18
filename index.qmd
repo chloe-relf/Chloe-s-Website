@@ -4,9 +4,6 @@ about:
   id: about-block
   image: "img/IMG_3010 2.jpg"
   links:
-    - icon: github
-      text: Github
-      href: https://github.com/chloerelf
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/chloe-relf/
