@@ -1,0 +1,336 @@
+---
+title: "Cardiometabolic Health in U.S. Adults"
+format: 
+  dashboard:
+    theme: [sandstone, theme/custom.scss]
+    fig-width: 10
+    fig-asp: 0.3
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(readxl)
+library(haven)
+library(scales)
+library(DT)
+library(gt)
+theme_set(theme_minimal(base_size = 24, base_family = "sans"))
+```
+
+```{r}
+#| label: load-data
+#| message: false
+
+demo <- read_xpt("data/P_DEMO.xpt")
+bmx <- read_xpt("data/P_BMX.xpt")
+bpx <- read_xpt("data/P_BPXO.xpt")
+```
+
+```{r}
+#| label: check-raw-data
+#| include: false
+
+# checking dimensions of raw data
+dim(demo)
+dim(bmx)
+dim(bpx)
+```
+
+```{r}
+#| label: prep-data
+
+#Select variables needed from each NHANES dataset
+demo_select <- demo %>%
+  select(SEQN, RIDSTATR, RIDAGEYR, RIAGENDR)
+
+bmx_select <- bmx %>%
+  select(SEQN, BMXBMI)
+
+bpx_select <- bpx %>%
+  select(
+    SEQN,
+    BPXOSY1, BPXOSY2, BPXOSY3,
+    BPXODI1, BPXODI2, BPXODI3
+  )
+
+# Merge datasets by participant ID
+nhanes <- demo %>%
+  inner_join(bmx, by = "SEQN") %>%
+  inner_join(bpx, by = "SEQN")
+
+# Create dataset for analysis
+nhanes_cleaned <- nhanes %>%
+  filter(
+    RIDSTATR == 2,
+    RIDAGEYR >= 21,
+    RIDAGEYR < 80
+  ) %>%
+  mutate(
+    age = RIDAGEYR,
+    sex = factor(
+      RIAGENDR,
+      levels = c(1, 2),
+      labels = c("Male", "Female")
+    ),
+    bmi = BMXBMI,
+#simplifying systolic & diastolic BP by averaging the 3 measures
+    systolic_bp = rowMeans(
+      cbind(BPXOSY1, BPXOSY2, BPXOSY3),
+      na.rm = TRUE
+    ),
+    diastolic_bp = rowMeans(
+      cbind(BPXODI1, BPXODI2, BPXODI3),
+      na.rm = TRUE
+    )
+  ) %>%
+  select(SEQN, RIDSTATR, age, sex, bmi, systolic_bp, diastolic_bp)
+```
+
+```{r}
+#| label: check-clean-data
+#| include: false
+
+dim(nhanes_cleaned)
+summary(nhanes_cleaned)
+```
+
+# Overview
+
+## {.sidebar}
+
+**Research Question:** What is the relationship between BMI and systolic BP among adults ages 21–79 in the 2017–March 2020 NHANES sample?
+
+**Population:** Examined NHANES participants ages 21–79  
+**Primary Exposure:** BMI (kg/m²)  
+**Outcome:** Mean systolic blood pressure  
+**Additional variables:** Age and sex
+
+```{r}
+#| label: all-values
+#| results: hide
+
+# Sample size
+n_participants <- nrow(nhanes_cleaned)
+
+# Descrptive statistics
+mean_age <- mean(nhanes_cleaned$age, na.rm = TRUE)
+mean_bmi <- mean(nhanes_cleaned$bmi, na.rm = TRUE)
+mean_sbp <- mean(nhanes_cleaned$systolic_bp, na.rm = TRUE)
+
+# Number of participants with systolic BP data
+n_participants_sbp <- sum(!is.na(nhanes_cleaned$systolic_bp))
+```
+
+## Row {height="25%"}
+
+```{r}
+#| content: valuebox
+#| title: "Total Participants"
+
+list(
+  icon = "people-fill",
+  color = "primary",
+  value = scales::comma(n_participants)
+)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Mean BMI"
+
+list(
+  icon = "person",
+  color = "primary",
+  value = round(mean_bmi, 1)
+)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Mean SBP"
+
+list(
+  icon = "heart-pulse",
+  color = "primary",
+  value = round(mean_sbp, 1)
+)
+```
+
+## Row {height="35%"}
+
+### Column {width="40%"}
+
+```{r}
+#| title: Sample characteristics
+
+nhanes_cleaned |>
+  summarise(
+    'Participants' = n(),
+    'Mean age' = mean(age, na.rm = TRUE),
+    'Mean BMI' = mean(bmi, na.rm = TRUE),
+    'Mean systolic BP' = mean(systolic_bp, na.rm = TRUE)
+  ) |>
+  gt() |>
+  fmt_number(
+    columns = c('Mean age', 'Mean BMI', 'Mean systolic BP'),
+    decimals = 1
+  )
+```
+
+### Column {width="60%"}
+
+```{r}
+#| title: BMI and Systolic Blood Pressure
+
+#BMI and systolic BP are both quantitative variables and a scatterplot allows me to examine direction and pattern of their relationship without categorizing either measure. The fitted regression line summarizes the overall linear association, while individual points show variability in the systolic BP across BMI.
+
+nhanes_cleaned |>
+  ggplot(aes(x = bmi, y = systolic_bp)) +
+  geom_point(
+    alpha = 0.12,
+    size = 1
+  )+
+  geom_smooth(
+    method = "lm", 
+    se = TRUE,
+    linewidth = 1
+  )+
+  labs(
+    x = "BMI (kg/m²)",
+    y = "Systolic BP (mmHg)"
+  )+
+  theme_minimal(base_size = 14)
+```
+
+```{r}
+#| label: bmi-model
+#| results: hide
+
+#Quantifying relationship that is visible in the scatterplot.
+
+bmi_model <- lm(
+  systolic_bp ~ bmi,
+  data = nhanes_cleaned
+)
+summary(bmi_model)
+```
+
+## Row {height="40%"}
+
+### Column {width="50%"}
+
+```{r}
+#| label: Age and Systolic Blood Pressure
+#| warning: false
+
+# Age and systolic BP are both quantitative, so a scatterplot makes sense again and the fitted line lets me see the overall direction of the relationship.
+
+nhanes_cleaned |>
+  ggplot(aes(x = age, y = systolic_bp))+
+  geom_point(
+    alpha = 0.08,
+    size = 0.8
+  ) +
+  geom_smooth(
+    method = "lm",
+    se = TRUE,
+    linewidth = 0.8
+  ) +
+  labs (
+    x = "Age (years)",
+    y = "Systolic BP (mmHg)"
+  ) +
+  scale_x_continuous(
+    breaks = seq(20, 80, by = 10) 
+  )+
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Column {width="50%"}
+
+```{r}
+#| label: Systolic Blood Pressure by Sex
+#| warning: false
+
+# Sex is categorical and Systolic BP is quantitative, so a boxplot lets me compare the distribution of systolic BP between the two groups.
+
+nhanes_cleaned |>
+  ggplot(aes(x = sex, y = systolic_bp)) +
+  geom_boxplot(
+    outlier.alpha = 0.3,
+    outlier.size = 1
+  ) +
+  labs(
+    x = "Sex",
+    y = "Systolic BP (mmHg)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    panel.grid.minor = element_blank()
+  )
+```
+
+# Regression Results
+
+## Row
+
+### Column {width="50%"}
+
+```{r}
+#| label: adjusted-model
+#| results: hide
+
+# Adjusting the BMI and systolic BP relationship for age and sex
+adjusted_model <- lm(
+  systolic_bp ~ bmi + age + sex,
+  data = nhanes_cleaned
+)
+
+summary(adjusted_model)
+```
+
+```{r}
+#| title: Adjusted Linear Regression Results
+
+model_results <- data.frame(
+  Predictor = c("BMI", "Age", "Female vs. Male"),
+  Estimate = c(
+    coef(adjusted_model)["bmi"],
+    coef(adjusted_model)["age"],
+    coef(adjusted_model)["sexFemale"]
+  ),
+  p_value = c(
+    "0.0003",
+    "<0.0001",
+    "<0.0001"
+  )
+)
+
+model_results |>
+  gt() |>
+  cols_label(
+    p_value = "P-value"
+  ) |>
+  fmt_number(
+    columns = Estimate,
+    decimals = 2
+  )
+```
+
+### Column {width="50%"}
+
+### Interpretation
+
+After adjusting for age and sex, higher BMI remained positively associated with systolic blood pressure. A one-unit increase in BMI was associated with approximately 0.10 mmHg higher systolic BP.
+
+Age was more strongly associated with systolic BP, with each additional year of age associated with approximately 0.48 mmHg higher systolic BP. Females had approximately 5.03 mmHg lower systolic BP than males, holding BMI and age constant.
+
+Overall, BMI was significantly associated with systolic BP, although the magnitude of the association was small.

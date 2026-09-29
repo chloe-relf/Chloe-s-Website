@@ -18,27 +18,69 @@
     "href": "projects/index.html",
     "title": "Projects",
     "section": "",
-    "text": "arXiv Preprint | Code\nOver the centuries, I have devoted countless hours to deciphering and translating the ancient scripts and dialects of the various peoples of Middle-earth. My goal is to gain a deeper understanding of the cultures and histories of these peoples by studying their languages. Currently, I am working on a monograph that explores the linguistic roots of the Elvish languages. Through extensive research and analysis, I hope to shed light on the connections between the different dialects of Elvish and their origins. This project has been particularly challenging, as Elvish is a complex and nuanced language, but I am determined to see it through to completion."
+    "text": "This project examines the relationship between body mass index (BMI) and systolic blood pressure among adults ages 21–79 using the 2017–March 2020 NHANES sample. I used descriptive visualizations and linear regression to examine the association between BMI and systolic blood pressure, with age and sex included in an adjusted model.\nView Project Report\nView Interactive Dashboard"
   },
   {
-    "objectID": "projects/index.html#the-languages-of-middle-earth",
-    "href": "projects/index.html#the-languages-of-middle-earth",
+    "objectID": "projects/index.html#bmi-and-systolic-blood-pressure-in-u.s.-adults",
+    "href": "projects/index.html#bmi-and-systolic-blood-pressure-in-u.s.-adults",
     "title": "Projects",
     "section": "",
-    "text": "arXiv Preprint | Code\nOver the centuries, I have devoted countless hours to deciphering and translating the ancient scripts and dialects of the various peoples of Middle-earth. My goal is to gain a deeper understanding of the cultures and histories of these peoples by studying their languages. Currently, I am working on a monograph that explores the linguistic roots of the Elvish languages. Through extensive research and analysis, I hope to shed light on the connections between the different dialects of Elvish and their origins. This project has been particularly challenging, as Elvish is a complex and nuanced language, but I am determined to see it through to completion."
+    "text": "This project examines the relationship between body mass index (BMI) and systolic blood pressure among adults ages 21–79 using the 2017–March 2020 NHANES sample. I used descriptive visualizations and linear regression to examine the association between BMI and systolic blood pressure, with age and sex included in an adjusted model.\nView Project Report\nView Interactive Dashboard"
   },
   {
-    "objectID": "projects/index.html#the-history-of-the-war-of-the-ring",
-    "href": "projects/index.html#the-history-of-the-war-of-the-ring",
-    "title": "Projects",
-    "section": "The History of the War of the Ring",
-    "text": "The History of the War of the Ring\n\narXiv Preprint | Code\nI am creating a comprehensive and detailed history of the conflict that goes beyond the surface-level events. By gathering information from a variety of sources, including my own memories, written accounts, and oral histories, I hope to shed new light on this important period in Middle-earth’s history and provide valuable insights into the motivations and actions of the various players involved."
+    "objectID": "projects/bmi-sbp-analysis.html",
+    "href": "projects/bmi-sbp-analysis.html",
+    "title": "BMI and Systolic Blood Pressure in U.S. Adults",
+    "section": "",
+    "text": "This analysis examines the relationship between body mass index (BMI) and systolic blood pressure among adults ages 21–79 in the 2017–March 2020 NHANES sample. BMI was selected as the primary exposure, and mean systolic blood pressure was selected as the outcome. Age and sex were also examined as additional variables that may be associated with systolic blood pressure.\nI hypothesized that higher BMI would be associated with higher systolic blood pressure.\n\n\nThe full results and visualizations from this analysis are available in the interactive dashboard.\nView the Cardiometabolic Health Dashboard"
+  },
+  {
+    "objectID": "projects/bmi-sbp-analysis.html#research-question-and-hypothesis",
+    "href": "projects/bmi-sbp-analysis.html#research-question-and-hypothesis",
+    "title": "BMI and Systolic Blood Pressure in U.S. Adults",
+    "section": "",
+    "text": "This analysis examines the relationship between body mass index (BMI) and systolic blood pressure among adults ages 21–79 in the 2017–March 2020 NHANES sample. BMI was selected as the primary exposure, and mean systolic blood pressure was selected as the outcome. Age and sex were also examined as additional variables that may be associated with systolic blood pressure.\nI hypothesized that higher BMI would be associated with higher systolic blood pressure.\n\n\nThe full results and visualizations from this analysis are available in the interactive dashboard.\nView the Cardiometabolic Health Dashboard"
+  },
+  {
+    "objectID": "projects/bmi-sbp-analysis.html#data-preparation",
+    "href": "projects/bmi-sbp-analysis.html#data-preparation",
+    "title": "BMI and Systolic Blood Pressure in U.S. Adults",
+    "section": "Data Preparation",
+    "text": "Data Preparation\nData were obtained from the 2017–March 2020 NHANES pre-pandemic files. I used the demographic, body measures, and blood pressure examination files. The files were joined using the participant identifier (SEQN).\nThe analytic sample was restricted to examined participants ages 21–79. BMI was obtained from the body measures data, while systolic blood pressure was calculated as the mean of up to three available systolic blood pressure measurements. Missing values were retained rather than removing participants from the full dataset."
+  },
+  {
+    "objectID": "projects/bmi-sbp-analysis.html#descriptive-analysis",
+    "href": "projects/bmi-sbp-analysis.html#descriptive-analysis",
+    "title": "BMI and Systolic Blood Pressure in U.S. Adults",
+    "section": "Descriptive Analysis",
+    "text": "Descriptive Analysis\nThe final analytic dataset contained 7,853 participants. The mean age was 49.3 years, the mean BMI was 30.2 kg/m², and the mean systolic blood pressure was 124.1 mmHg.\nI first examined the relationship between BMI and systolic blood pressure using a scatterplot with a fitted linear regression line. Because both variables are quantitative, the scatterplot allows the individual observations and overall direction of the relationship to be examined without categorizing either variable.\nI also examined age in relation to systolic blood pressure using a scatterplot and compared the distribution of systolic blood pressure between males and females using a boxplot."
+  },
+  {
+    "objectID": "projects/bmi-sbp-analysis.html#regression-analysis",
+    "href": "projects/bmi-sbp-analysis.html#regression-analysis",
+    "title": "BMI and Systolic Blood Pressure in U.S. Adults",
+    "section": "Regression Analysis",
+    "text": "Regression Analysis\nI first fit a simple linear regression model with systolic blood pressure as the outcome and BMI as the predictor. I then fit an adjusted linear regression model including BMI, age, and sex. The adjusted model was used to examine the association between BMI and systolic blood pressure while accounting for age and sex."
+  },
+  {
+    "objectID": "projects/bmi-sbp-analysis.html#results",
+    "href": "projects/bmi-sbp-analysis.html#results",
+    "title": "BMI and Systolic Blood Pressure in U.S. Adults",
+    "section": "Results",
+    "text": "Results\nIn the unadjusted model, a one-unit increase in BMI was associated with approximately 0.09 mmHg higher systolic blood pressure. Although this association was statistically significant (p = 0.0024), BMI alone explained very little of the variation in systolic blood pressure (R² = 0.001).\nAfter adjusting for age and sex, the association between BMI and systolic blood pressure remained positive. A one-unit increase in BMI was associated with approximately 0.10 mmHg higher systolic blood pressure (p = 0.0003), holding age and sex constant.\nAge showed a stronger positive association with systolic blood pressure. Each additional year of age was associated with approximately 0.48 mmHg higher systolic blood pressure (p &lt; 0.0001). Females had approximately 5.03 mmHg lower systolic blood pressure than males (p &lt; 0.0001), holding BMI and age constant. The adjusted model explained approximately 19.2% of the variation in systolic blood pressure."
+  },
+  {
+    "objectID": "projects/bmi-sbp-analysis.html#conclusion",
+    "href": "projects/bmi-sbp-analysis.html#conclusion",
+    "title": "BMI and Systolic Blood Pressure in U.S. Adults",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe results supported my hypothesis that higher BMI would be associated with higher systolic blood pressure, although the magnitude of this association was small. The relationship between age and systolic blood pressure was substantially stronger in this sample, and systolic blood pressure also differed by sex.\nThese findings show why it is useful to consider additional characteristics when examining the relationship between BMI and blood pressure. Because this analysis used observational NHANES data, the results describe associations and should not be interpreted as evidence that BMI causes changes in systolic blood pressure."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Welcome to my website!",
     "section": "",
-    "text": "LinkedIn\n  \n  \n    \n     Email\n  \n\n\n\n\nWelcome to my website!\nI am Chloe Relf, an MPH student at Case Western Reserve University, where I am studying population health research. I also received my bachelor’s degree from Case, majoring in Economics and Psychology with additional coursework in biology and chemistry.\nI currently work in the Samuels Laboratory at the Louis Stokes Cleveland VA Medical Center, where I contribute to research on diabetic retinopathy using mouse models. My research experience has included laboratory techniques such as PCR, immunohistochemistry, and electroretinography, as well as work examining the biological mechanisms underlying retinal disease.\nMy current interests involve expanding from laboratory-based health research toward population-level questions in epidemiology and health economics. I am particularly interested in zoonotic and vector-borne diseases, disease risk and prevention, and the ways economic and healthcare systems influence population health outcomes. Through my MPH training, I am developing quantitative and epidemiologic skills that I hope to apply to these areas in future research.\nPlease feel free to contact me if you have any questions or would like to discuss potential projects."
+    "text": "Github\n  \n  \n    \n     LinkedIn\n  \n  \n    \n     Email\n  \n\n\n\n\nWelcome to my website!\nI am Chloe Relf, an MPH student at Case Western Reserve University, where I am studying population health research. I also received my bachelor’s degree from Case, majoring in Economics and Psychology with additional coursework in biology and chemistry.\nI currently work in the Samuels Laboratory at the Louis Stokes Cleveland VA Medical Center, where I contribute to research on diabetic retinopathy using mouse models. My research experience has included laboratory techniques such as PCR, immunohistochemistry, and electroretinography, as well as work examining the biological mechanisms underlying retinal disease.\nMy current interests involve expanding from laboratory-based health research toward population-level questions in epidemiology and health economics. I am particularly interested in zoonotic and vector-borne diseases, disease risk and prevention, and the ways economic and healthcare systems influence population health outcomes. Through my MPH training, I am developing quantitative and epidemiologic skills that I hope to apply to these areas in future research.\nPlease feel free to contact me if you have any questions or would like to discuss potential projects."
   }
 ]

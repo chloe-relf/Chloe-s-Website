@@ -2,23 +2,13 @@
 title: Projects
 ---
 
-## The Languages of Middle-earth
+## BMI and Systolic Blood Pressure in U.S. Adults
 
-<img src="project_1_banner.png" style="height: 100%; width: 100%; object-fit: contain" onclick="window.open('https://arxiv.org/abs/2210.07278', 'blank');"/>
+This project examines the relationship between body mass index (BMI) and systolic blood pressure among adults ages 21–79 using the 2017–March 2020 NHANES sample. I used descriptive visualizations and linear regression to examine the association between BMI and systolic blood pressure, with age and sex included in an adjusted model.
 
-<a href="https://arxiv.org/abs/2210.07278" target="_blank">arXiv Preprint</a> | <a href="https://github.com/marvinschmitt/MetaUncertaintyPaper" target="_blank">Code</a><br>
+[View Project Report](bmi-sbp-analysis.html){.btn .btn-primary}
 
-Over the centuries, I have devoted countless hours to deciphering and translating the ancient scripts and dialects of the various peoples of Middle-earth. My goal is to gain a deeper understanding of the cultures and histories of these peoples by studying their languages. Currently, I am working on a monograph that explores the linguistic roots of the Elvish languages. Through extensive research and analysis, I hope to shed light on the connections between the different dialects of Elvish and their origins. This project has been particularly challenging, as Elvish is a complex and nuanced language, but I am determined to see it through to completion.
-
-----
-
-## The History of the War of the Ring
-
-<img src="project_2_banner.png" style="height: 100%; width: 100%; object-fit: contain" onclick="window.open('https://arxiv.org/abs/2112.08866', 'blank');"/>
-
-<a href="https://arxiv.org/abs/2112.08866" target="_blank">arXiv Preprint</a> | <a href="https://github.com/marvinschmitt/ModelMisspecificationBF" target="_blank">Code</a><br>
-
-I am creating a comprehensive and detailed history of the conflict that goes beyond the surface-level events. By gathering information from a variety of sources, including my own memories, written accounts, and oral histories, I hope to shed new light on this important period in Middle-earth's history and provide valuable insights into the motivations and actions of the various players involved.
+[View Interactive Dashboard](dashboard_CER.html){.btn .btn-secondary}
 
 
 
